@@ -10,5 +10,5 @@ class Player{
     int Playery;
     public:
     Player(int x,int y);
-    std::vector<Point> PlayerVision(Map map,int fov,int deg);
+    std::vector<Point2D> PlayerVision(Map map,int fov,int deg);
 };

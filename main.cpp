@@ -6,8 +6,12 @@
 #include "player.h"
 
 using namespace std;
-
 int main(){
+
+
+    
+    /*
+
     Player p = Player(3,5);
     char map_digits[] = {
         ' ',' ',' ',' ',' ',' ',' ',' ',' ',
@@ -27,7 +31,7 @@ int main(){
     for(auto point : points){
         cout<<"Point: "<< point.x<< " "<< point.y<<endl;
     }
-    /*
+
 
     int i = 0;
     auto now = chrono::steady_clock::now();

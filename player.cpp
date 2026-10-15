@@ -1,4 +1,5 @@
 #include "player.h"
+#include <iostream>
 using namespace std;
 
 
@@ -6,7 +7,7 @@ Player::Player(int x,int y){
     Playerx = x;
     Playery = y;
 }
-vector<Point> Player::PlayerVision(Map map,int fov,int deg){
+vector<Point2D> Player::PlayerVision(Map map,int fov,int deg){
     int curY = Playery;
     int curX = Playerx;
     
@@ -14,19 +15,20 @@ vector<Point> Player::PlayerVision(Map map,int fov,int deg){
 
     int cols = map.c();
     const char* data = map.d();
-    vector<Point> points;
+    vector<Point2D> points;
     
     for(int degree = -halfFov; degree <= halfFov;degree+=fov/deg){
-        for(int i = 1; i < curY;i++){
+        float i = 0;
+        while(i < curY){
             float d = (tan(degree*M_PI/180)*(i));
             int shit = (int) d;
 
-            if(data[(curY-i)*cols+curX+shit] == '#') {
-                Point point = {curX+d,(float)curY-i};
+            if(data[(int)((curY-i))*cols+curX+shit] == '#') {
+                Point2D point = {d,i};
                 points.push_back(point);
                 break;
             }
-
+            i+=0.1;
         }
     }
     return points;
