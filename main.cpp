@@ -3,13 +3,18 @@
 #include <vector>
 #include <cmath>
 #include <locale>
+#include <map>
 #include "map.h"
 #include "player.h"
 #include "column.h"
 
 using namespace std;
+int normalize(int num,int start,int end){
+    if(num < start) return start;
+    if(num > end) return end;
+    return num;
+}
 int main(){
-    cout << "Полоса загрузки: ██████▒▒▒▒" << std::endl;
     Player p = Player(3,6);
     char map_digits[] = {
         ' ',' ',' ',' ',' ',' ',' ',' ',' ',
@@ -18,44 +23,60 @@ int main(){
         ' ',' ','#',' ','#',' ',' ',' ',' ',
         ' ',' ',' ',' ',' ',' ',' ',' ',' ',
         ' ',' ',' ',' ',' ',' ',' ',' ',' ',
-        ' ',' ',' ','P',' ',' ',' ',' ',' ',
+        ' ',' ',' ',' ',' ',' ',' ',' ',' ',
         ' ',' ',' ',' ',' ',' ',' ',' ',' ',
         ' ',' ',' ',' ',' ',' ',' ',' ',' '
     };
-    Map map(9,9,(char*) map_digits);
-    map.print();
-    auto points = p.PlayerVision(map,140,40);
-    const int h = 30;
-
-    vector<int> cols;
-
+    Map mapa(9,9,(char*) map_digits);
+    auto points = p.PlayerVision(mapa,140,60);
+    const int h = 40;
+    int maxY =0;
+    vector<vector<int>> cols;
+    for (auto point : points){
+        int rY = round(point.y*10);
+        if(rY > maxY) maxY =rY;
+    }
     for(auto point : points){
         if(point.y == 0){
+            vector<int> nums;
             for (size_t i = 0; i < h; i++)
             {
-                cols.push_back(0);
+
+                nums.push_back(0);
             }
+            cols.push_back(nums);
             continue;
         }
+        vector<int> nums;
+
         int k =0;
         int p = round(h/point.y);
         for(int i = 0; i < p/2;i++){
             k++;
-            cols.push_back(0);
+            nums.push_back(0);
         }
         for(int i = 0; i < p;i++){
             k++;
-            if(point.y<1.5) cols.push_back(4);
-            else if(point.y < 2.5) cols.push_back(3);
-            else if(point.y < 3.5) cols.push_back(2);
-            else cols.push_back(1);
+            int rY = round(point.y*10);
+            nums.push_back(normalize(maxY-rY+1,0,10));
         }
-        while(k<=h){
+        while(k<h){
             k++;
-            cols.push_back(0);
+            nums.push_back(0);
         }
+        cols.push_back(nums);
+
     }
-    Camera camera = Camera(50);
+
+    map<int, string> nToG = {
+        {0,  " "},   {1,  "."},
+        {2,  ":"},   {3,  "-"},
+        {4,  "="},   {5,  "+"},   
+        {6,  "*"},   {7,  "░"},
+        {8,  "▒"},   {9,  "▓"},
+        {10, "█"}  
+    };
+    Camera camera = Camera(h,points.size(),nToG);
     camera.Vision(cols);
     /*
 
