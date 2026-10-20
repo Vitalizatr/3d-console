@@ -1,7 +1,8 @@
-<img width="734" height="583" alt="Снимок экрана 2026-10-20 в 21 17 49" src="https://github.com/user-attachments/assets/bdfc5cc0-721b-4a0d-8a44-01bcc9324497" />
+
 # 3D Console
 
 A small C++ console-based pseudo-3D maze game made as a personal coding experiment and challenge.
+<img width="734" height="583" alt="Снимок экрана 2026-10-20 в 21 17 49" src="https://github.com/user-attachments/assets/bdfc5cc0-721b-4a0d-8a44-01bcc9324497" />
 
 ## Project background
 
