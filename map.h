@@ -6,6 +6,7 @@ private:
     int cols;
 
 public:
+    Map() = default; 
     Map(int r, int c, char* initial_data);
 
     void print() const;
