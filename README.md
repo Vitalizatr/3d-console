@@ -30,6 +30,7 @@ The player can:
 - explore a small environment from a first-person point of view
 
 ## Features
+<img width="590" height="456" alt="Console-game" src="https://github.com/user-attachments/assets/0c5d664f-eaf5-480f-b8a1-6ce8ae0ac900" />
 
 - 2D map-based level
 - pseudo-3D console rendering
